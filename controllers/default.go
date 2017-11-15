@@ -17,10 +17,15 @@ func (main *MainController) HelloSitepoint() {
 	main.TplName = "default/hello-sitepoint.tpl"
 	main.Data["Id"] = main.Ctx.Input.Param(":id")
 	req := main.Ctx.Request
-	ip := getLocalIP()
+	//ip := getLocalIP()
+	dial, _ := net.Dial("tcp", "baidu.com:80")
+	//network := dial.RemoteAddr().Network()
+	ip := dial.LocalAddr().String()
+	//ip := req.Header.Get("Host")
 	Host, _ := os.Hostname()
 	UserAgent := req.Header.Get("User-Agent")
 	main.Data["UserAgent"] = UserAgent
+	//main.Data["network"] = network
 	main.Data["user_ip"] = ip
 	main.Data["Host"] = Host
 }
