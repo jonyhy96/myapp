@@ -21,7 +21,10 @@ func getecho(str string) string {
 	defer conn.Close()
 	c := pb.NewGreeterClient(conn)
 	// Contact the server and print out its response.
-	name := str
+	name := defaultName
+	if str != "" {
+		name = str
+	}
 	r, err := c.SayHello(context.Background(), &pb.HelloRequest{Name: name})
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
@@ -35,4 +38,6 @@ func main() {
 	flag.Parse()
 	str = getecho(str)
 	log.Printf("echo: %s", str)
+	for {
+	}
 }
