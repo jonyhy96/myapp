@@ -9,8 +9,11 @@ import (
 type MainController struct {
 	beego.Controller
 }
+type UserController struct {
+	beego.Controller
+}
 
-func (main *MainController) HelloSitepoint() {
+func (main *UserController) HelloSitepoint() {
 	main.Data["Website"] = "My Website"
 	main.Data["Email"] = "hy352144278@gmail.com"
 	main.Data["EmailName"] = "JONY"
