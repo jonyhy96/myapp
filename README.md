@@ -13,4 +13,4 @@
 ![view](https://github.com/jonyhy96/train1/blob/master/imag.jpg)
 
 作者 [@jonyhy][1]
-[1] https://weibo.com/u/5991880963
+[1]https://weibo.com/u/5991880963
