@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option objc_class_prefix = "Myapp";
+
+package myapp;
+
+// The greeting service definition.
+service Myappserver {
+  // Sends a greeting
+  rpc Echo (EchoRequest) returns (EchoReply) {}
+  rpc Gettime(GettimeRequest) returns (stream GettimeReply) {}
+}
+
+// The request message containing the user's name.
+message EchoRequest {
+  string command = 1;
+}
+
+// The response message containing the greetings
+message EchoReply {
+  string name = 1;
+}
+message GettimeRequest {
+  string command = 1;
+}
+
+// The response message containing the greetings
+message GettimeReply {
+  string name = 1;
+}

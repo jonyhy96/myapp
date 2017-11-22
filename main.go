@@ -1,55 +1,69 @@
 package main
 
 import (
+	"fmt"
 	"github.com/astaxie/beego"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/reflection"
 	"log"
 	pb "myapp/protoc"
 	_ "myapp/routers"
 	"net"
+	"time"
 )
 
 const (
-	port = ":50051"
+	address  = "localhost:4959"
+	address2 = "localhost:4950"
+	port     = "4959"
+	port2    = "4950"
 )
 
 // server is used to implement helloworld.GreeterServer.
-type server struct{}
-
-func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
-	return &pb.HelloReply{Message: "" + in.Name}, nil
+type Myappserver struct {
+	Ecreply []*pb.EchoReply
+	Gtreply []*pb.GettimeReply
 }
-func startEchoServer() {
-	lis, err := net.Listen("tcp", port)
+
+func (s *Myappserver) Echo(ctx context.Context, in *pb.EchoRequest) (*pb.EchoReply, error) {
+	fmt.Println(in.Command)
+	return &pb.EchoReply{Name: in.Command}, nil
+}
+func (s *Myappserver) Gettime(rect *pb.GettimeRequest, stream pb.Myappserver_GettimeServer) error {
+	for {
+		timer := time.NewTimer(time.Second * 60)
+		time := time.Now()
+		Timeecho := pb.GettimeReply{}
+		const layout = "Jan 2, 2006 at 3:04pm (MST)"
+		Timeecho.Name = time.Format(layout)
+		err := stream.Send(&pb.GettimeReply{Name: time.Format(layout)})
+		if err != nil {
+			fmt.Println("ERR", err)
+			return err
+		}
+		<-timer.C
+	}
+}
+func start_echo() {
+	lis, err := net.Listen("tcp", address)
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+		log.Fatalf("failed to listen : %v", err)
 	}
 	s := grpc.NewServer()
-	pb.RegisterGreeterServer(s, &server{})
-	reflection.Register(s)
-	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)
+	pb.RegisterMyappserverServer(s, &Myappserver{})
+	s.Serve(lis)
+}
+func start_time() {
+	lis, err := net.Listen("tcp", address2)
+	if err != nil {
+		log.Fatalf("failed to listen : %v", err)
 	}
-	for {
-		// Wait for a connection.
-		conn, err := lis.Accept()
-		if err != nil {
-			log.Fatal(err)
-		}
-		// Handle the connection in a new goroutine.
-		// The loop then returns to accepting, so that
-		// multiple connections may be served concurrently.
-		go func(c net.Conn) {
-			// Echo all incoming data.
-			log.Fatalf("client said:", c)
-			// Shut down the connection.
-			c.Close()
-		}(conn)
-	}
+	s := grpc.NewServer()
+	pb.RegisterMyappserverServer(s, &Myappserver{})
+	s.Serve(lis)
 }
 func main() {
-	go startEchoServer()
+	go start_echo()
+	go start_time()
 	beego.Run()
 }
