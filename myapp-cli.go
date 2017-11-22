@@ -1,43 +1,59 @@
 package main
 
 import (
-	"flag"
+	"fmt"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
-	pb "google.golang.org/grpc/examples/helloworld/helloworld"
+	pb "grpc/protoc"
 	"log"
+	"os"
 )
 
 const (
-	address     = "localhost:50051"
-	defaultName = "world"
+	address        = "localhost:4959"
+	defaultcommand = "hello"
 )
 
-func getecho(str string) string {
+func get_echo() {
 	conn, err := grpc.Dial(address, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
 	defer conn.Close()
-	c := pb.NewGreeterClient(conn)
-	// Contact the server and print out its response.
-	name := defaultName
-	if str != "" {
-		name = str
+	c := pb.NewMyappserverClient(conn)
+	name := defaultcommand
+	if len(os.Args) > 1 {
+		name = os.Args[1]
 	}
-	r, err := c.SayHello(context.Background(), &pb.HelloRequest{Name: name})
+	r, err := c.Echo(context.Background(), &pb.EchoRequest{Command: name})
 	if err != nil {
-		log.Fatalf("could not greet: %v", err)
+		log.Fatalf("could not echo: %v", err)
 	}
-	log.Println("echo successed")
-	return r.Message
+	log.Printf("Echo :%v", r.Name)
+}
+func get_time() {
+	conn, err := grpc.Dial(address, grpc.WithInsecure())
+	if err != nil {
+		log.Fatalf("did not connect: %v", err)
+	}
+	defer conn.Close()
+	c := pb.NewMyappserverClient(conn)
+	gtcli := pb.GettimeRequest{Command: ""}
+	//gtime := pb.GettimeReply{Name: ""}
+	timestream, _ := c.Gettime(context.Background(), &gtcli)
+	for true {
+		gtime, err := timestream.Recv()
+		if err != nil {
+			fmt.Println("receive error")
+		}
+		if gtime.Name != "" {
+			fmt.Println(gtime.Name)
+		}
+	}
 }
 func main() {
-	var str string
-	flag.StringVar(&str, "e", "", "write string to use.  defaults to empty.")
-	flag.Parse()
-	str = getecho(str)
-	log.Printf("echo: %s", str)
-	for {
-	}
+	fmt.Println("start get echo")
+	go get_echo()
+	fmt.Println("strt to get time")
+	get_time()
 }
