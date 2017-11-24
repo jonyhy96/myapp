@@ -46,7 +46,7 @@ func (s *Myappserver) Gettime(rect *pb.GettimeRequest, stream pb.Myappserver_Get
 	}
 }
 func start_echo() {
-	lis, err := net.Listen("tcp", address)
+	lis, err := net.Listen("tcp", port)
 	if err != nil {
 		log.Fatalf("failed to listen : %v", err)
 	}
@@ -55,7 +55,7 @@ func start_echo() {
 	s.Serve(lis)
 }
 func start_time() {
-	lis, err := net.Listen("tcp", address2)
+	lis, err := net.Listen("tcp", port2)
 	if err != nil {
 		log.Fatalf("failed to listen : %v", err)
 	}
