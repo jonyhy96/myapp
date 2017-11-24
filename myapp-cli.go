@@ -11,6 +11,7 @@ import (
 
 const (
 	address        = "localhost:4959"
+	address2       = "localhost:4950"
 	defaultcommand = "hello"
 )
 
@@ -32,7 +33,7 @@ func get_echo() {
 	log.Printf("Echo :%v", r.Name)
 }
 func get_time() {
-	conn, err := grpc.Dial(address, grpc.WithInsecure())
+	conn, err := grpc.Dial(address2, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}

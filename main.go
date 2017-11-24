@@ -26,7 +26,7 @@ type Myappserver struct {
 }
 
 func (s *Myappserver) Echo(ctx context.Context, in *pb.EchoRequest) (*pb.EchoReply, error) {
-	fmt.Println(in.Command)
+	fmt.Println("client said:", in.Command)
 	return &pb.EchoReply{Name: in.Command}, nil
 }
 func (s *Myappserver) Gettime(rect *pb.GettimeRequest, stream pb.Myappserver_GettimeServer) error {
@@ -37,6 +37,7 @@ func (s *Myappserver) Gettime(rect *pb.GettimeRequest, stream pb.Myappserver_Get
 		const layout = "Jan 2, 2006 at 3:04pm (MST)"
 		Timeecho.Name = time.Format(layout)
 		err := stream.Send(&pb.GettimeReply{Name: time.Format(layout)})
+		fmt.Println("Send time:", time.Format(layout))
 		if err != nil {
 			fmt.Println("ERR", err)
 			return err
