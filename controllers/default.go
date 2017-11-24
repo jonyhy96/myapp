@@ -12,6 +12,16 @@ type MainController struct {
 type UserController struct {
 	beego.Controller
 }
+type PlayController struct {
+	beego.Controller
+}
+
+func (c *PlayController) Play() {
+	c.Data["Website"] = "beego.me"
+	c.Data["Email"] = "astaxie@gmail.com"
+	c.TplName = "play.tpl"
+	c.Data["Id"] = c.Ctx.Input.Param(":id")
+}
 
 func (main *UserController) HelloSitepoint() {
 	main.Data["Website"] = "My Website"
