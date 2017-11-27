@@ -15,8 +15,8 @@ import (
 const (
 	address  = "localhost:4959"
 	address2 = "localhost:4950"
-	port     = "4959"
-	port2    = "4950"
+	port     = ":4959"
+	port2    = ":4950"
 )
 
 // server is used to implement helloworld.GreeterServer.
