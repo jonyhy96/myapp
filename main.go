@@ -34,7 +34,7 @@ func (s *Myappserver) Gettime(rect *pb.GettimeRequest, stream pb.Myappserver_Get
 		timer := time.NewTimer(time.Second * 60)
 		time := time.Now()
 		Timeecho := pb.GettimeReply{}
-		const layout = "Jan 2, 2006 at 3:04pm (MST)"
+		const layout = "Jan 2, 2006 at 3:04pm (CST)"
 		Timeecho.Name = time.Format(layout)
 		err := stream.Send(&pb.GettimeReply{Name: time.Format(layout)})
 		fmt.Println("Send time:", time.Format(layout))
