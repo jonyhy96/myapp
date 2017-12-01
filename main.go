@@ -1,11 +1,11 @@
 package main
 
 import (
-	"fmt"
+	"flag"
 	"github.com/astaxie/beego"
+	"github.com/golang/glog"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
-	"log"
 	pb "myapp/protoc"
 	_ "myapp/routers"
 	"net"
@@ -26,7 +26,7 @@ type Myappserver struct {
 }
 
 func (s *Myappserver) Echo(ctx context.Context, in *pb.EchoRequest) (*pb.EchoReply, error) {
-	fmt.Println("client said:", in.Command)
+	glog.Infoln("client said:" + in.Command)
 	return &pb.EchoReply{Name: in.Command}, nil
 }
 func (s *Myappserver) Gettime(rect *pb.GettimeRequest, stream pb.Myappserver_GettimeServer) error {
@@ -34,12 +34,12 @@ func (s *Myappserver) Gettime(rect *pb.GettimeRequest, stream pb.Myappserver_Get
 		timer := time.NewTimer(time.Second * 60)
 		time := time.Now()
 		Timeecho := pb.GettimeReply{}
-		const layout = "Jan 2, 2006 at 3:04pm (CST)"
+		const layout = "Jan 2, 2006 at 3:04pm (MST)"
 		Timeecho.Name = time.Format(layout)
 		err := stream.Send(&pb.GettimeReply{Name: time.Format(layout)})
-		fmt.Println("Send time:", time.Format(layout))
+		glog.Infoln("Send time:" + time.Format(layout))
 		if err != nil {
-			fmt.Println("ERR", err)
+			glog.Info(err)
 			return err
 		}
 		<-timer.C
@@ -48,7 +48,7 @@ func (s *Myappserver) Gettime(rect *pb.GettimeRequest, stream pb.Myappserver_Get
 func start_echo() {
 	lis, err := net.Listen("tcp", port)
 	if err != nil {
-		log.Fatalf("failed to listen : %v", err)
+		glog.Info(err)
 	}
 	s := grpc.NewServer()
 	pb.RegisterMyappserverServer(s, &Myappserver{})
@@ -57,17 +57,19 @@ func start_echo() {
 func start_time() {
 	lis, err := net.Listen("tcp", port2)
 	if err != nil {
-		log.Fatalf("failed to listen : %v", err)
+		glog.Info(err)
 	}
 	s := grpc.NewServer()
 	pb.RegisterMyappserverServer(s, &Myappserver{})
 	s.Serve(lis)
 }
 func main() {
+	flag.Parse()
+	defer glog.Flush()
 	go start_echo()
-	fmt.Println("start echo server")
+	glog.Info("start echo server")
 	go start_time()
-	fmt.Println("start time server")
+	glog.Info("start time server")
 	beego.BConfig.WebConfig.Session.SessionOn = true
 	beego.Run()
 }

@@ -4,9 +4,9 @@ import (
 	"crypto/md5"
 	"database/sql"
 	"encoding/hex"
-	"fmt"
 	"github.com/astaxie/beego"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/golang/glog"
 	"net"
 	"os"
 )
@@ -48,7 +48,7 @@ func (main *LoginController) Post() {
 	db, err := linkTomysql()
 	defer db.Close()
 	if err != nil {
-		fmt.Println(err)
+		glog.Info(err)
 	} else {
 		if username == "" {
 			main.Redirect("/user/signup", 302)
@@ -56,8 +56,8 @@ func (main *LoginController) Post() {
 		} else {
 			rows, err := db.Query("select username,password from customer where username=? and password=?", username, password)
 			if err != nil {
-				fmt.Println("查询失败")
-				fmt.Println(err)
+				glog.Infoln("查询失败")
+				glog.Info(err)
 				main.Redirect("/user/signup", 302)
 				return
 			} else {
@@ -66,20 +66,20 @@ func (main *LoginController) Post() {
 					main.SetSession("password", main.GetString("password"))
 					rows, err = db.Query("select userinfo from customer where username=? ", username)
 					if err != nil {
-						fmt.Println(err)
+						glog.Info(err)
 					}
 					var s string
 					for rows.Next() {
 						if err := rows.Scan(&s); err != nil {
-							fmt.Println(err)
+							glog.Info(err)
 						}
 					}
 					main.SetSession("userinfo", s)
-					fmt.Println("登录成功！")
+					glog.Infoln("登录成功！")
 					main.Redirect("/user/profile", 302)
 					return
 				} else {
-					fmt.Println("登录失败！")
+					glog.Infoln("登录失败！")
 					main.Redirect("/user/signup", 302)
 					return
 				}
@@ -95,7 +95,7 @@ func (main *LoginController) Get() {
 func (main *SignupController) Post() {
 	db, err := linkTomysql()
 	if err != nil {
-		fmt.Println(err)
+		glog.Info(err)
 	}
 	defer db.Close()
 	username := main.GetString("username")
@@ -158,7 +158,7 @@ func getLocalIP() string {
 func linkTomysql() (*sql.DB, error) {
 	db, err := sql.Open("mysql", "root:123456@tcp(192.168.34.38)/myapp?charset=utf8")
 	if err != nil {
-		fmt.Println("连接服务器失败！")
+		glog.Infoln("连接服务器失败！")
 	}
 	return db, nil
 }
