@@ -25,6 +25,8 @@
         <div class="row">
             <div class="hero-text">
                 <h1>Welcome to the Sitepoint / Beego App!</h1>
+                <p style="color:red" align="left">OEM:{{.OEM}}</p> 
+		        <p style="color:red" align="left">VER:{{.VER}}</p> 
                 <h2>This is My Test Version</h2>
                 <input name="url" type="text" style="width:50%;height:10%"  id="url" value="https://v.qq.com/x/cover/v2bohhli64p784o.html" /> </br>
                 <input class="btn2" type="submit" name="Submit" value="播放" onclick="geturl();"/>

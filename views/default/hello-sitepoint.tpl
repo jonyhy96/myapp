@@ -1,6 +1,6 @@
 <html>
   <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.js"></script>
+    <script src="/static/js/p5.js"></script>
     <script src="/static/js/sketch.js"></script>
     <script language="javascript"> 
     function geturl(){ 
@@ -13,16 +13,23 @@
     <div class="container">
         <div class="row">
             <div class="hero-text">
-                <h1>Welcome to the Sitepoint / Beego App!</h1>
+                <p style="color:red" align="left">OEM:{{.OEM}}</p> 
+		        <p style="color:red" align="left">VER:{{.VER}}</p> 
+                <h1>欢迎您！{{.Username}}</h1>
                 <h2>This is My Test Version</h2>
+                <p>VIP视频解析</p>
                 <input name="url" type="text" id="url" value="" /> 
                 <input type="submit" name="Submit" value="播放" onclick="geturl();"/>
+                </br>
+                <p>您的用户名称为： {{.Username}}</p>
+                </br>
+                <p>您的密码为：{{.Password}}</p>
+                </br>
+                <p>您的个人信息：{{.Userinfo}}</p>
                 </br>
                 <p>{{.Host}}</p>
                 <p>{{.UserAgent}}</p>
                 <p>{{.user_ip}}</p>
-                </br>
-                <p>{{.Website}} {{.Email}} {{.EmailName}} {{.Id}}</p>
             </div>
         </div>
     </div>

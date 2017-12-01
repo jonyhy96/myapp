@@ -15,8 +15,8 @@ import (
 const (
 	address  = "localhost:4959"
 	address2 = "localhost:4950"
-	port     = "4959"
-	port2    = "4950"
+	port     = ":4959"
+	port2    = ":4950"
 )
 
 // server is used to implement helloworld.GreeterServer.
@@ -65,6 +65,9 @@ func start_time() {
 }
 func main() {
 	go start_echo()
+	fmt.Println("start echo server")
 	go start_time()
+	fmt.Println("start time server")
+	beego.BConfig.WebConfig.Session.SessionOn = true
 	beego.Run()
 }
