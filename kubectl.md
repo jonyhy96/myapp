@@ -158,3 +158,11 @@ frontend                                0/2       ContainerCreating   0
 ```
 pod "frontend" deleted
 ```
+### 8.测试命令 kubectl scale
+```
+[root@node1 ~]# kubectl scale --replicas=4 deployment/myapp
+```
+### 8.运行结果
+```
+deployment "myapp" scaled
+```
