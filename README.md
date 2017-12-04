@@ -28,10 +28,29 @@ Server->Client: Send Time
 `注册成功过后会自动跳转到登录界面`
 ### **4. 用户登录服务**
 `访问界面:http://serverip:8088/user/login`
-![signup](https://github.com/jonyhy96/train1/blob/master/login.jpg)
+![login](https://github.com/jonyhy96/train1/blob/master/login.jpg)
 输入用户名，密码以登陆
 `登陆成功过后会自动跳转到profile界面，否则则跳转到注册界面`
-
-浏览器返回界面：
-![view](https://github.com/jonyhy96/train1/blob/master/imag.jpg)
-作者 [@jonyhy](https://weibo.com/u/5991880963)
+### **5. 用户个人信息显示**
+![profile](https://github.com/jonyhy96/train1/blob/master/profile.jpg)
+## **Useage：**##
+### **1.下载源码**###
+```
+    git clone https://github.com/jonyhy96/myapp.git
+```
+`您可能要修改源码中对mysql的操作指令，示例中使用的mysql是root:12345，database为myapp，table为customer`
+`如果您不做修改可能会报错，出错原因大都是找不到 数据库或表单的问题，修改源码main.go即可解决`
+### **2. 进入myapp目录下**###
+```
+    cd myapp
+```
+### **3. 编译出myapp镜像**###
+```
+    make
+```
+`你可以通过修改Dockerfile来修改myapp版本和名称等信息`
+### **4.运行myapp服务**###
+```
+    docker run -p accessport:8088 -p echoport:4959 -p timeport:4950 myapp:latest ./myapp
+```
+**作者** [@jonyhy](https://weibo.com/u/5991880963)
