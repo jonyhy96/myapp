@@ -5,6 +5,7 @@
 ## **现有功能：**
 ### **1. echo服务**
 `实现服务器回显客户端输入的功能`
+
 ```sequence
 Client->Server: Dial:serverip:4959
 Note right of Server:  listen port 4959
@@ -15,6 +16,7 @@ Server->Client: Send echo
 
 ### **2. Time服务**
 `实现服务器定时发送当前时间到客户端`
+
 ```sequence
 Client->Server: Dial:serverip:4950
 Note right of Server:  listen port 4950
