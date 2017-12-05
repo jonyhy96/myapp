@@ -74,7 +74,6 @@ Server->Client: Send Time
 
 **解决办法：**
 ```
-    1.kubectl mysql —replicas=1//将副本数变为1
-    2.将mysql数据挂载到nfs上
+    kubectl mysql —replicas=1//将副本数变为1
 ```
 **作者** [@jonyhy](https://weibo.com/u/5991880963)
