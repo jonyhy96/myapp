@@ -55,4 +55,21 @@ Server->Client: Send Time
 ```
     docker run -p accessport:8088 -p echoport:4959 -p timeport:4950 myapp:latest ./myapp
 ```
+##**可能遇到的问题：**
+###**1.找不到依赖包**
+**问题分析：**
+`当使用go run命令时候，系统会自动运行$GOPATH下的程式`
+**解决办法：**
+```
+    mv myapp PATH:/go/src //将源码拷贝到虚拟机的go/src目录下
+```
+###**2.数据库使用时找不到表**
+**问题分析：**
+`mysql副本大于1时如果没有设置不共享磁盘则系统会调度不同的mysql使用`
+`而每个mysql对应的数据库和表如果有差异就会出现找不到的错误`
+**解决办法：**
+```
+    1.kubectl mysql —replicas=1//将副本数变为1
+    2.将mysql数据挂载到nfs上
+```
 **作者** [@jonyhy](https://weibo.com/u/5991880963)
