@@ -1,7 +1,5 @@
 <html>
   <head>
-    <script src="/static/js/p5.js"></script>
-    <script src="/static/js/sketch.js"></script>
     <script language="javascript"> 
     function geturl(){ 
         var url="http://api.baiyug.cn/vip/index.php?url="+document.getElementById("url").value; 
