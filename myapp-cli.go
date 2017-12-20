@@ -21,16 +21,18 @@ func get_echo() {
 		log.Fatalf("did not connect: %v", err)
 	}
 	defer conn.Close()
-	c := pb.NewMyappserverClient(conn)
-	name := defaultcommand
-	if len(os.Args) > 1 {
-		name = os.Args[1]
+	for {
+		c := pb.NewMyappserverClient(conn)
+		name := defaultcommand
+		if len(os.Args) > 1 {
+			name = os.Args[1]
+		}
+		r, err := c.Echo(context.Background(), &pb.EchoRequest{Command: name})
+		if err != nil {
+			log.Fatalf("could not echo: %v", err)
+		}
+		log.Printf("Echo :%v", r.Name)
 	}
-	r, err := c.Echo(context.Background(), &pb.EchoRequest{Command: name})
-	if err != nil {
-		log.Fatalf("could not echo: %v", err)
-	}
-	log.Printf("Echo :%v", r.Name)
 }
 func get_time() {
 	conn, err := grpc.Dial(address2, grpc.WithInsecure())
