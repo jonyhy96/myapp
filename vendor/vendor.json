@@ -69,41 +69,75 @@
 			"revisionTime": "2016-01-25T20:49:56Z"
 		},
 		{
-			"checksumSHA1": "cRxfZM32wP1Ry67s3jLRoYxAz/E=",
+			"checksumSHA1": "vvjWzLZndAKDWRvKp2rbQsiSz4Q=",
 			"path": "github.com/golang/protobuf/proto",
 			"revision": "1e59b77b52bf8e4b449a57e6f79f21226d571845",
 			"revisionTime": "2017-11-13T18:07:20Z"
 		},
 		{
-			"checksumSHA1": "4I7eM9gcEKwCPcylbFFQuDHbCqo=",
+			"checksumSHA1": "ajaN6vRh2On+56KLOPMEimx6aB0=",
 			"path": "github.com/golang/protobuf/ptypes",
 			"revision": "1e59b77b52bf8e4b449a57e6f79f21226d571845",
 			"revisionTime": "2017-11-13T18:07:20Z"
 		},
 		{
-			"checksumSHA1": "dRlQ/jrbeQD+Vh9dxXGbzB80KyU=",
+			"checksumSHA1": "jmuqqzJc+MMkFOk5H8Gi6JyeF44=",
 			"path": "github.com/golang/protobuf/ptypes/any",
 			"revision": "1e59b77b52bf8e4b449a57e6f79f21226d571845",
 			"revisionTime": "2017-11-13T18:07:20Z"
 		},
 		{
-			"checksumSHA1": "+3VeYa2T1tcG+H97kGMlco35Rl8=",
+			"checksumSHA1": "a+PKjtXtVbNfHaTxTSTMk+JeyJ4=",
 			"path": "github.com/golang/protobuf/ptypes/duration",
 			"revision": "1e59b77b52bf8e4b449a57e6f79f21226d571845",
 			"revisionTime": "2017-11-13T18:07:20Z"
 		},
 		{
-			"checksumSHA1": "hmfEHJBOSdPRIxEMiyL2K+VHU0I=",
+			"checksumSHA1": "Y5PLkgZCZIlNnGy2HDZ+Ng4eNxw=",
 			"path": "github.com/golang/protobuf/ptypes/timestamp",
 			"revision": "1e59b77b52bf8e4b449a57e6f79f21226d571845",
 			"revisionTime": "2017-11-13T18:07:20Z"
 		},
 		{
+			"checksumSHA1": "zAYiCImp71kmsyPMbcaoc0cGT6k=",
+			"path": "github.com/jtolds/gls",
+			"revision": ""
+		},
+		{
+			"checksumSHA1": "wOdaejkZchGzkGiPYCfxc3RN+Tk=",
+			"path": "github.com/smartystreets/assertions",
+			"revision": ""
+		},
+		{
+			"checksumSHA1": "D/geobFtKMvBIAONfT+4sie/PGk=",
+			"path": "github.com/smartystreets/assertions/internal/go-render/render",
+			"revision": ""
+		},
+		{
+			"checksumSHA1": "/Mlt459vsuvFRHpxOiCNMasmE28=",
+			"path": "github.com/smartystreets/assertions/internal/oglematchers",
+			"revision": ""
+		},
+		{
+			"checksumSHA1": "YOjUWDCYj2X/TrCEkO0tbU9StNk=",
+			"path": "github.com/smartystreets/goconvey/convey",
+			"revision": ""
+		},
+		{
+			"checksumSHA1": "Tm/GOrmVTe6k2F9ZZMp9vWAvzD4=",
+			"path": "github.com/smartystreets/goconvey/convey/gotest",
+			"revision": ""
+		},
+		{
+			"checksumSHA1": "t3Kpg1pgZfUHTYUVSisBrXyPNXc=",
+			"path": "github.com/smartystreets/goconvey/convey/reporting",
+			"revision": ""
+		},
+		{
 			"checksumSHA1": "GtamqiJoL7PGHsN454AoffBFMa8=",
 			"path": "golang.org/x/net/context",
 			"revision": "a337091b0525af65de94df2eb7e98bd9962dcbe2",
-			"revisionTime": "2016-10-09T20:39:03Z",
-			"version": "v1"
+			"revisionTime": "2016-10-09T20:39:03Z"
 		},
 		{
 			"checksumSHA1": "RhpmDgSgY6ZyJbkksQSOHbwsTQw=",
@@ -296,6 +330,11 @@
 			"path": "google.golang.org/grpc/transport",
 			"revision": "409fd8e23b1b48140bc8dc73950f762063baa859",
 			"revisionTime": "2017-11-14T00:33:42Z"
+		},
+		{
+			"checksumSHA1": "DFb2kLVLJJYM+iOphz7o9aSIEVs=",
+			"path": "grpc/protoc",
+			"revision": ""
 		}
 	],
 	"rootPath": "myapp"
